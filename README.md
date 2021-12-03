@@ -20,7 +20,7 @@
 
 <hr>
 
-**Grid-template-Columns: 100px 100px 100px 100px**
+**Grid-template-Columns: 100px 100px 100px 100px** <br>
 Grid-template-Columns define a quantidade de colunas e tamanho de cada coluna dentro do container.
 
 Item 1  | Item 2  | Item 3  | Item 4
