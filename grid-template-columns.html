@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid-template-columns</title>
+
+    <style>
+        * {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .bloco {
+            text-align: center;
+            max-height: 1030px;
+            background-color: rgb(205, 213, 247);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .bloco h1 {
+            grid-column: 1 / 4;
+        }
+
+        .bloco span {
+            padding: 30px;
+            
+        }
+
+        .bloco section {
+            grid-column: 2 / 3;
+            margin-bottom: 20px;
+        }
+
+        .bloco:nth-child(2n) {
+            background-color: white;
+        }
+
+        h1 {
+            padding: 40px;
+            font-size: 1.3em;
+            color: rgb(49, 49, 49);
+        }
+
+        .grid {         
+            display: grid;
+            max-width: 500px;
+            border: 1px solid rgb(139, 139, 139);
+        }
+
+        /* 100px é o valor total, ignora conteúdo, margem e etc. Respeita apenas o min-width do item.*/
+        .grid-template-columns-1 {
+            grid-template-columns: 100px 100px 100px 100px;
+
+        }
+
+        /* fr é um valor fracionario*/
+        .grid-template-columns-2 {
+            grid-template-columns: 1fr 2fr;
+        }
+
+        /* minmax define o minimo e o maximo para a coluna*/
+        .grid-template-columns-3 {
+            grid-template-columns: minmax(200px, 1fr) 1fr 1fr;
+        }
+
+        /* repeat vai repetir o número de colunas */
+        .grid-template-columns-4 {
+            grid-template-columns: 1fr repeat(3, 1fr) 50px;
+
+        }
+
+        /* auto-fit vai calcular automaticamente o total de colunas*/
+        .grid-template-columns-5 {
+            grid-template-columns: repeat(auto-fit, 100px);
+        }
+
+        /* Com o auto-fit é criado layout responsivo*/
+        .grid-template-columns-6 {
+            grid-template-columns: repeat(auto-fit, minmax(100px, auto));
+            max-width: 850px !important;
+        }
+
+        .grid-template-columns-7 {
+            grid-template-columns: repeat(auto-fill, minmax(100px, auto));
+            max-width: 850px !important;
+        }
+
+        /*GridTemplateRows*/
+
+        .bloco-rows {
+            text-align: center;
+            max-height: 500px;
+            background-color: rgb(205, 213, 247);
+        }
+
+        .bloco-rows:nth-child(2n) {
+            background-color: white;
+        }
+
+        .grid-rows {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-width: 400px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            border: 1px solid rgb(139, 139, 139);
+        }
+
+        .grid-template-rows-1 {
+            grid-template-rows: 50px 100px 50px 150px;
+        }
+
+        .grid-template-rows-2 {
+            grid-template-rows: 100px 100px;
+        }
+
+        .grid-template-rows-3 {
+            grid-template-rows: 1fr 2fr 1fr 3fr;
+        }
+
+        .grid-template-rows-4 {
+            grid-template-columns: 100px auto 50px;
+            grid-template-rows: 50px 200px auto;
+        }
+
+        .grid-template-rows-5 {
+            grid-template-columns: 100px auto 50px;
+            grid-template-rows: 1fr 150px minmax(100px, auto);
+        }
+
+        /* Grid-template_Areas*/
+
+        .logo {
+            grid-area: logo;
+        }
+
+        .nav {
+            grid-area: nav;
+        }
+
+        .content {
+            grid-area: content;
+        }
+
+        .sidenav {
+            grid-area: sidenav;
+        }
+
+        .advert {
+            grid-area: advert;
+        }
+
+        .footer {
+            grid-area: footer;
+        }
+
+
+        .grid-template-areas-1 {
+            grid-template-areas:
+                "logo nav nav"
+                "sidenav content advert"
+                "sidenav footer footer"
+        }
+
+        .grid-template-areas-2 {
+            grid-template-areas:
+                "sidenav logo nav"
+                "sidenav content advert"
+                "sidenav content footer";
+        }
+
+        @media (max-width: 1000px) {
+            .grid-template-areas-2 {
+                grid-template-areas:
+                    "nav nav nav"
+                    "logo content advert"
+                    "sidenav footer footer";
+            }
+        }
+
+        .grid-template-areas-3 {
+            grid-template-areas:
+                "logo logo"
+                "nav nav"
+                "content content"
+                "sidenav advert"
+                "footer footer";
+        }
+
+        .grid-template-areas-4 {
+            grid-template-columns: 100px auto 50px;
+            grid-template-rows: 50px 200px 40px;
+            grid-template-areas:
+                "logo nav nav"
+                "sidenav content advert"
+                "sidenav footer footer";
+        }
+
+        .grid-template-areas-5 {
+            grid-template-areas:
+                "logo nav nav"
+                ". content advert"
+                "sidenav footer .";
+        }
+
+        /* Grid-template*/
+
+        .grid-template-1 {
+            /* Tamanho de cada linha / Quantidade de colunas*/
+            grid-template: 100px 50px / repeat(3, 1fr);
+        }
+
+        .grid-template-2 {
+            grid-template:
+                "logo nav nav"50px "sidenav content advert"150px "sidenav footer footer"/ 100px 1fr 2fr;
+        }
+
+        /* Gap */
+
+        .gap-1 {
+            grid-template: 100px 50px 80px / repeat(2, 1fr);
+            gap: 10px 30px;
+        }
+
+        .gap-2 {
+            grid-template:
+                "logo nav nav"50px "sidenav content advert"150px "footer footer footer"50px / 100px 2fr 1fr;
+            row-gap: 10px;
+            column-gap: 40px;
+        }
+
+        /* grid-auto-columns-1 */
+
+        .item-6 {
+            grid-column: 6;
+        }
+
+        .grid-auto-columns-1 {
+            grid-template-columns: 1fr 1fr;
+            grid-auto-columns: 1fr;
+        }
+
+        .grid-auto-columns-2 {
+            grid-template-columns: 100px 200px;
+            grid-auto-columns: 50px 75px;
+        }
+
+        .grid-auto-columns-3 {
+            grid-template-columns: 1fr 1fr;
+            grid-auto-columns: auto;
+        }
+
+        /* grid-auto-rows*/
+
+        .grid-auto-rows-1 {
+            grid-template-rows: 1fr 1fr;
+            grid-auto-rows: 100px;
+        }
+
+        .grid-auto-rows-2 {
+            grid-template:
+                "logo nav nav"50px "sidenav content advert"100px "sidenav footer footer"75px / 100px 1fr 50px;
+            grid-auto-rows: 50px 100px;
+        }
+
+        /* grid-auto-flow-1 */
+
+        .grid-auto-flow-1 {
+            grid-template-columns: 100px 200px 100px;
+            grid-auto-flow: column;
+        }
+
+        @media (max-width: 700px) {
+            .grid-auto-flow-1 {
+                grid-template-columns: auto;
+            }
+        }
+
+        .grid-auto-flow-2 {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: 50px 50px;
+            grid-auto-columns: 200px;
+            grid-auto-flow: column;
+        }
+
+        .grid-auto-flow-3 {
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-auto-flow: dense;
+        }
+
+        .flow-item-2 {
+            grid-column: span 3;
+        }
+
+        .flow-item-4 {
+            grid-column: span 3;
+        }
+
+        /* Grid */
+
+        .grid-1 {
+            grid: 100px 75px 30px / 1fr 1fr;
+        }
+
+        .grid-2 {
+            grid: 100px / auto-flow 100px 50px;
+            /* grid-template-columns: 100px 50px;
+            grid-auto-flow: column;                   <- faz a mesma coisa que o grid*/
+        }
+
+        .grid-3 {
+            grid:
+                "logo nav nav"50px "sidenav content advert"125px "sidenav footer footer"50px / 50px 1fr 50px;
+        }
+
+        /* Justify-content*/
+
+        .justify-item-2 {
+            grid-row: span 2;
+        }
+
+        .justify-item-3 {
+            grid-row: span 2;
+        }
+
+        .justify-item-5 {
+            grid-column: span 2;
+        }
+
+        .justify-grid {
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+        }
+
+        .justify-start {
+            justify-content: start;
+        }
+
+        .justify-end {
+            justify-content: end;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .justify-stretch {
+            grid-template-columns: auto;
+            justify-content: stretch;
+        }
+
+        .justify-space-between {
+            justify-content: space-between;
+        }
+
+        .justify-space-around {
+            justify-content: space-around;
+        }
+
+        .justify-space-evenly {
+            justify-content: space-evenly;
+        }
+
+        /* Align-content*/
+
+        .align-grid {
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 50px);
+            height: 300px;
+        }
+
+
+        .align-start {
+            align-content: start;
+        }
+
+        .align-end {
+            align-content: end;
+        }
+
+        .align-center {
+            align-content: center;
+        }
+
+        .align-stretch {
+            grid-template-columns: auto;
+            align-content: stretch;
+        }
+
+        .align-space-between {
+            align-content: space-between;
+        }
+
+        .align-space-around {
+            align-content: space-around;
+        }
+
+        .align-space-evenly {
+            align-content: space-evenly;
+        }
+
+        /*justify-items*/
+
+        .justify-item-grid {
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 50px);
+        }
+
+        .justify-item-start {
+            justify-items: start;
+        }
+
+        .justify-item-end {
+            justify-items: end;
+        }
+
+        .justify-item-center {
+            justify-items: center;
+        }
+
+        .justify-item-stretch {
+            justify-items: stretch;
+        }
+
+        /*Align-Items*/
+
+        .align-items-grid {
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            height: 200px;
+        }
+
+        .align-item-start {
+            align-items: start;
+        }
+
+        .align-item-end {
+            align-items: end;
+        }
+
+        .align-item-center {
+            align-items: center;
+        }
+
+        .align-item-stretch {
+            align-items: stretch;
+        }
+
+        /* Grid-column */
+
+        .grid-column-1 {
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 50px;
+        }
+
+        .grid-column-1 .grid-column-item-1 {
+            grid-column: 3;
+        }
+
+        .grid-column-1 .grid-column-item-3 {
+            grid-column: 3;
+        }
+
+        .grid-column-2 {
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 60px);
+        }
+
+        .grid-column-2 .grid-column-item-3 {
+            grid-column: 1 / -1;
+        }
+
+        .grid-column-2 .grid-column-item-5 {
+            grid-column: span 2;
+        }
+
+        .grid-column-2 .grid-column-item-6 {
+            grid-column: 2 / 4;
+        }
+
+        .grid-column-3 {
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 60px)
+        }
+
+        .grid-column-3 .grid-column-item-2 {
+            grid-column: 1 / 3
+        }
+
+        .grid-column-3 .grid-column-item-4 {
+            grid-column-start: 1;
+            grid-column-end: 3;
+        }
+
+        .grid-column-4 {
+            grid-template-columns: [inicio] 1fr [meio] 1fr [final];
+            grid-template-rows: repeat(2, 75px)
+        }
+
+        .grid-column-4 .grid-column-item-2 {
+            grid-column: inicio / final;
+        }
+
+        .grid-column-5 {
+            grid-template-areas: 
+            "header header header" 
+            "sidenav content ads" 
+            "sidenav footer footer" 
+        }
+
+        .grid-column-5 .grid-column-item-1 {
+            grid-column-start: header;
+            grid-column-end: ads;
+        }
+
+        .grid-column-5 .grid-column-item-2 {
+            grid-column-start: sidenav; 
+            grid-column-end: sidenav;
+            grid-row-start: sidenav;
+            grid-row-end: sidenav;
+        }
+
+        .grid-column-5 .grid-column-item-3 {
+            grid-column: content / content;
+        }
+
+        .grid-column-5 .grid-column-item-4 {
+            grid-column-start: ads;
+        }
+
+        .grid-column-5 .grid-column-item-5 {
+            grid-column-start: footer;
+            grid-column-end: footer;
+        }
+
+        .grid-column-6 {
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 50px 50px;
+        }
+
+        .grid-column-6 .grid-column-item-1 {
+            grid-column: 1 / -1;
+        }
+
+        .grid-column-6 .grid-column-item-2 {
+            grid-column: 1;
+            grid-row: 2 / 4;
+        }
+
+        .grid-column-6 .grid-column-item-3 {
+            grid-column: 2 / 3;
+        }
+
+        .grid-column-6 .grid-column-item-4 {
+            grid-column: 3 / 4;
+        }
+
+        .grid-column-6 .grid-column-item-5 {
+            grid-column: 2 / 4;
+        }
+
+        
+
+        .item {
+            margin: 5px;
+            background: rgb(142, 142, 221);
+            text-align: center;
+            font-size: 1.3em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <h2 style="text-align: center; background-color: rgb(10, 115, 156); color: rgb(255, 255, 255); padding: 10px;">
+            Grid-Template-Columns</h2>
+        <div class="bloco">
+            <h1>Grid-template-columns: 100px 100px 100px 100px;</h1>
+            <section class="grid grid-template-columns-1">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-template-columns: 100px 100px 100px 100px;</h1>
+            <section class="grid grid-template-columns-1">
+                <div class="item">Texto Teste</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">TextoTeste</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-template-columns: 1fr 2fr</h1>
+            <section class="grid grid-template-columns-2">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-template-columns: 2fr 1fr</h1>
+            <section class="grid grid-template-columns-2">
+                <div class="item">PalavraTesteGrandeRespeita</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-template-columns: mimmax(200px, 1fr) 1fr 1fr</h1>
+            <section class="grid grid-template-columns-3">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-template-columns: mimmax(200px, 1fr) 1fr 1fr</h1>
+            <section class="grid grid-template-columns-3">
+                <div class="item">PalavraTeste</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-template-columns: mimmax(200px, 1fr) 1fr 1fr</h1>
+            <section class="grid grid-template-columns-3">
+                <div class="item">1</div>
+                <div class="item">TextoGrandeParaTeste</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-template-columns: 1fr repeat(3, 1fr) 50px</h1>
+            <section class="grid grid-template-columns-4">
+                <div class="item">1</div>
+                <div class="item">TextoGrandeParaTeste</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-template-columns: repeat(auto-fit, 100px);</h1>
+            <section class="grid grid-template-columns-5">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-template-columns: repeat(auto-fit, minmax(100px, auto));</h1>
+            <section class="grid grid-template-columns-6">
+                <div class="item">TextoGrandeParaTeste</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+            </section>
+            <p>Cria colunas e preenche com o tamanho maximo de cada coluna</p>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-template-columns: repeat(auto-fill, minmax(100px, auto));;</h1>
+            <section class="grid grid-template-columns-7">
+                <div class="item">TextoGrandeParaTeste</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+            </section>
+            <p>Cria colunas com tamanho prédefinido para todos os items</p>
+            <br>
+        </div>
+
+    </div>
+
+    <div>
+        <h2 style="text-align: center; background-color: rgb(10, 115, 156); color: rgb(255, 255, 255); padding: 10px;">
+            Grid-Template-Rows</h2>
+
+        <div class="bloco-rows">
+            <h1>Grid-template-Rows: 50px 100px 50px 150px</h1>
+            <section class="grid-rows grid-template-rows-1">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+                <div class="item">7</div>
+                <div class="item">8</div>
+            </section>
+        </div>
+
+        <div class="bloco-rows">
+            <h1>Grid-template-Rows: 100px 100px</h1>
+            <section class="grid-rows grid-template-rows-2">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+                <div class="item">7</div>
+                <div class="item">8</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco-rows">
+            <h1>Grid-template-Rows: 1fr 2fr 1fr 3fr</h1>
+            <section class="grid-rows grid-template-rows-3">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+                <div class="item">7</div>
+                <div class="item">8</div>
+            </section>
+        </div>
+
+        <div class="bloco-rows">
+            <h1>Grid-template-columns / Grid-template-Rows</h1>
+            <section class="grid-rows grid-template-rows-4">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+                <div class="item">7</div>
+                <div class="item">8</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco-rows">
+            <h1>Grid-template-columns / Grid-template-Rows</h1>
+            <section class="grid-rows grid-template-rows-5">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+                <div class="item">7</div>
+                <div class="item">8</div>
+            </section>
+            <br>
+        </div>
+
+    </div>
+
+    <div>
+        <h2 style="text-align: center; background-color: rgb(10, 115, 156); color: rgb(255, 255, 255); padding: 10px;">
+            Grid-Template-Areas</h2>
+
+        <div class="bloco">
+            <h1>Grid-Template-Areas</h1>
+            <section class="grid grid-template-areas-1">
+                <div class="item logo">logo</div>
+                <div class="item nav">nav</div>
+                <div class="item content">content</div>
+                <div class="item sidenav">sidenav</div>
+                <div class="item advert">advert</div>
+                <div class="item footer">footer</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-Template-Areas</h1>
+            <section class="grid grid-template-areas-2">
+                <div class="item logo">logo</div>
+                <div class="item nav">nav</div>
+                <div class="item content">content</div>
+                <div class="item sidenav">sidenav</div>
+                <div class="item advert">advert</div>
+                <div class="item footer">footer</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-Template-Areas (mobile)</h1>
+            <section class="grid grid-template-areas-3">
+                <div class="item logo">logo</div>
+                <div class="item nav">nav</div>
+                <div class="item content">content</div>
+                <div class="item sidenav">sidenav</div>
+                <div class="item advert">advert</div>
+                <div class="item footer">footer</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-Template-Areas (Coluna e Linha)</h1>
+            <section class="grid grid-template-areas-4">
+                <div class="item logo">logo</div>
+                <div class="item nav">nav</div>
+                <div class="item content">content</div>
+                <div class="item sidenav">sidenav</div>
+                <div class="item advert">advert</div>
+                <div class="item footer">footer</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-Template-Areas (. Para areas vazias)</h1>
+            <section class="grid grid-template-areas-5">
+                <div class="item logo">logo</div>
+                <div class="item nav">nav</div>
+                <div class="item content">content</div>
+                <div class="item sidenav">sidenav</div>
+                <div class="item advert">advert</div>
+                <div class="item footer">footer</div>
+            </section>
+            <br>
+        </div>
+
+    </div>
+
+    <div>
+        <h2 style="text-align: center; background-color: rgb(10, 115, 156); color: rgb(255, 255, 255); padding: 10px;">
+            Grid-Template</h2>
+
+        <div class="bloco">
+            <h1>Grid-Template: 100px 50px / repeat(3, 1fr); </h1>
+            <section class="grid grid-template-1">
+                <div class="item">logo</div>
+                <div class="item">nav</div>
+                <div class="item">content</div>
+                <div class="item">sidenav</div>
+                <div class="item">advert</div>
+                <div class="item">footer</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-Template (areas, columns e rows)</h1>
+            <section class="grid grid-template-2">
+                <div class="item logo">logo</div>
+                <div class="item nav">nav</div>
+                <div class="item content">content</div>
+                <div class="item sidenav">sidenav</div>
+                <div class="item advert">advert</div>
+                <div class="item footer">footer</div>
+            </section>
+            <br>
+            <span>"Area" rows / columns </span>
+
+        </div>
+
+    </div>
+
+    <div>
+        <h2 style="text-align: center; background-color: rgb(10, 115, 156); color: rgb(255, 255, 255); padding: 10px;">
+            Gap</h2>
+
+        <div class="bloco">
+            <h1>Gap: 10px; </h1>
+            <section class="grid gap-1">
+                <div class="item">logo</div>
+                <div class="item">nav</div>
+                <div class="item">content</div>
+                <div class="item">sidenav</div>
+                <div class="item">advert</div>
+                <div class="item">footer</div>
+            </section>
+            <br>
+            <span>Gap: linha coluna. ex: gap: 10px 25px</span>
+
+        </div>
+
+        <div class="bloco">
+            <h1>Row-Gap / Column-Gap </h1>
+            <section class="grid gap-2">
+                <div class="item logo">logo</div>
+                <div class="item nav">nav</div>
+                <div class="item content">content</div>
+                <div class="item sidenav">sidenav</div>
+                <div class="item advert">advert</div>
+                <div class="item footer">footer</div>
+            </section>
+            <br>
+        </div>
+
+    </div>
+
+    <div>
+        <h2 style="text-align: center; background-color: rgb(10, 115, 156); color: rgb(255, 255, 255); padding: 10px;">
+            Grid-auto-columns</h2>
+
+        <div class="bloco">
+            <h1>Grid-auto-columns</h1>
+            <span>
+                grid-auto-columns define um tamanho padrao para cada coluna nova que for criada <br>
+                lembrando que o footer esta definido para se posicionar na 5 coluna
+            </span>
+
+            <section class="grid grid-auto-columns-1">
+                <div class="item">logo</div>
+                <div class="item">nav</div>
+                <div class="item">content</div>
+                <div class="item">sidenav</div>
+                <div class="item">advert</div>
+                <div class="item item-6">footer</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-auto-columns: 50px 100px</h1>
+
+            <section class="grid grid-auto-columns-2">
+                <div class="item">logo</div>
+                <div class="item">nav</div>
+                <div class="item">content</div>
+                <div class="item">sidenav</div>
+                <div class="item">advert</div>
+                <div class="item item-6">footer</div>
+            </section>
+            <br>
+        </div>
+
+
+        <div class="bloco">
+            <h1>Grid-auto-columns não definido</h1>
+
+            <section class="grid grid-auto-columns-3">
+                <div class="item">logo</div>
+                <div class="item">nav</div>
+                <div class="item">content</div>
+                <div class="item">sidenav</div>
+                <div class="item">advert</div>
+                <div class="item item-6">footer</div>
+            </section>
+            <br>
+        </div>
+
+    </div>
+
+    <div>
+        <h2 style="text-align: center; background-color: rgb(10, 115, 156); color: rgb(255, 255, 255); padding: 10px;">
+            Grid-auto-rows</h2>
+
+        <div class="bloco">
+            <h1>Grid-auto-rows</h1>
+            <section class="grid grid-auto-rows-1">
+                <div class="item">logo</div>
+                <div class="item">nav</div>
+                <div class="item">content</div>
+                <div class="item">sidenav</div>
+                <div class="item">advert</div>
+                <div class="item">footer</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-auto-rows: 50px 100px;</h1>
+            <section class="grid grid-auto-rows-2">
+                <div class="item logo">logo</div>
+                <div class="item nav">nav</div>
+                <div class="item content">content</div>
+                <div class="item sidenav">sidenav</div>
+                <div class="item advert">advert</div>
+                <div class="item footer">footer</div>
+                <div class="item">W</div>
+                <div class="item">W</div>
+                <div class="item">W</div>
+                <div class="item">W</div>
+                <div class="item">W</div>
+                <div class="item">W</div>
+                <div class="item">W</div>
+                <div class="item">W</div>
+            </section>
+            <br>
+        </div>
+    </div>
+
+    <div>
+        <h2 style="text-align: center; background-color: rgb(10, 115, 156); color: rgb(255, 255, 255); padding: 10px;">
+            Grid-auto-rows</h2>
+
+        <div class="bloco">
+            <h1>Grid-auto-flow: column</h1>
+            <section class="grid grid-auto-flow-1">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-auto-flow: column</h1>
+            <section class="grid grid-auto-flow-2">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-auto-flow: dense</h1>
+            <span>A propriedade dense encaixa items em espaços vazios</span>
+
+            <section class="grid grid-auto-flow-3">
+                <div class="item">1</div>
+                <div class="item flow-item-2">2</div>
+                <div class="item">3</div>
+                <div class="item flow-item-4">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+                <div class="item">7</div>
+                <div class="item">8</div>
+                <div class="item">9</div>
+            </section>
+            <br>
+        </div>
+    </div>
+
+    <div>
+        <h2 style="text-align: center; background-color: rgb(10, 115, 156); color: rgb(255, 255, 255); padding: 10px;">
+            Grid</h2>
+
+        <div class="bloco">
+            <h1>Grid: 100px 75px 30px / 1fr 1fr</h1>
+            <section class="grid grid-1">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid: 100px / auto-flow 100px 50px</h1>
+            <section class="grid grid-2">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid: 100px / auto-flow 100px 50px</h1>
+            <section class="grid grid-3">
+                <div class="item logo">logo</div>
+                <div class="item nav">nav</div>
+                <div class="item content">content</div>
+                <div class="item sidenav">sidenav</div>
+                <div class="item advert">advert</div>
+                <div class="item footer">footer</div>
+            </section>
+            <br>
+        </div>
+    </div>
+
+    <div>
+        <h2 style="text-align: center; background-color: rgb(10, 115, 156); color: rgb(255, 255, 255); padding: 10px;">
+            Grid</h2>
+
+        <div class="bloco">
+            <h1>Justify-content: start;</h1>
+            <span>Justifica os items ao ínicio</span>
+            <section class="grid justify-grid justify-start">
+                <div class="item">1</div>
+                <div class="item justify-item-2">2</div>
+                <div class="item justify-item-3">3</div>
+                <div class="item">4</div>
+                <div class="item justify-item-5">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Justify-content: end;</h1>
+            <span>Justifica os items ao final</span>
+            <section class="grid justify-grid justify-end">
+                <div class="item">1</div>
+                <div class="item justify-item-2">2</div>
+                <div class="item justify-item-3">3</div>
+                <div class="item">4</div>
+                <div class="item justify-item-5">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Justify-content: center;</h1>
+            <span>Centraliza o conteúdo.</span>
+            <section class="grid justify-grid justify-center">
+                <div class="item">1</div>
+                <div class="item justify-item-2">2</div>
+                <div class="item justify-item-3">3</div>
+                <div class="item">4</div>
+                <div class="item justify-item-5">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Justify-content: stretch;</h1>
+            <span>Estica os items.</span>
+            <section class="grid justify-grid justify-stretch">
+                <div class="item">1</div>
+                <div class="item justify-item-2">2</div>
+                <div class="item justify-item-3">3</div>
+                <div class="item">4</div>
+                <div class="item justify-item-5">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Justify-content: space-beetwen;</h1>
+            <span>Cria um espaço entre os elementos, ignorando o inicio e o fim.</span>
+            <section class="grid justify-grid justify-space-between">
+                <div class="item">1</div>
+                <div class="item justify-item-2">2</div>
+                <div class="item justify-item-3">3</div>
+                <div class="item">4</div>
+                <div class="item justify-item-5">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Justify-content: space-around;</h1>
+            <span>Distribui espaço entre os elementos. (o inicio e o final são menores que o espaço interno).</span>
+            <section class="grid justify-grid justify-space-around">
+                <div class="item">1</div>
+                <div class="item justify-item-2">2</div>
+                <div class="item justify-item-3">3</div>
+                <div class="item">4</div>
+                <div class="item justify-item-5">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Justify-content: space-evenly;</h1>
+            <span>Cria um espaço igual entre as colunas (no inicio e fim também).</span>
+            <section class="grid justify-grid justify-space-evenly">
+                <div class="item">1</div>
+                <div class="item justify-item-2">2</div>
+                <div class="item justify-item-3">3</div>
+                <div class="item">4</div>
+                <div class="item justify-item-5">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+    </div>
+
+    <div>
+        <h2 style="text-align: center; background-color: rgb(10, 115, 156); color: rgb(255, 255, 255); padding: 10px;">
+            align-content: start;</h2>
+
+        <div class="bloco">
+            <h1>Align-content: start;</h1>
+            <span>Justifica os items ao ínicio</span>
+            <section class="grid align-grid align-start">
+                <div class="item">1</div>
+                <div class="item justify-item-2">2</div>
+                <div class="item justify-item-3">3</div>
+                <div class="item">4</div>
+                <div class="item justify-item-5">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Align-content: end;</h1>
+            <span>Justifica os items ao final</span>
+            <section class="grid align-grid align-end">
+                <div class="item">1</div>
+                <div class="item justify-item-2">2</div>
+                <div class="item justify-item-3">3</div>
+                <div class="item">4</div>
+                <div class="item justify-item-5">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Align-content: center;</h1>
+            <span>Centraliza o conteúdo.</span>
+            <section class="grid align-grid align-center">
+                <div class="item">1</div>
+                <div class="item justify-item-2">2</div>
+                <div class="item justify-item-3">3</div>
+                <div class="item">4</div>
+                <div class="item justify-item-5">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Align-content: stretch;</h1>
+            <span>Estica os items.</span>
+            <section class="grid align-grid align-stretch">
+                <div class="item">1</div>
+                <div class="item justify-item-2">2</div>
+                <div class="item justify-item-3">3</div>
+                <div class="item">4</div>
+                <div class="item justify-item-5">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Align-content: space-beetwen;</h1>
+            <span>Cria um espaço entre os elementos, ignorando o inicio e o fim.</span>
+            <section class="grid align-grid align-space-between">
+                <div class="item">1</div>
+                <div class="item justify-item-2">2</div>
+                <div class="item justify-item-3">3</div>
+                <div class="item">4</div>
+                <div class="item justify-item-5">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Align-content: space-around;</h1>
+            <span>Distribui espaço entre os elementos. (o inicio e o final são menores que o espaço interno).</span>
+            <section class="grid align-grid align-space-around">
+                <div class="item">1</div>
+                <div class="item justify-item-2">2</div>
+                <div class="item justify-item-3">3</div>
+                <div class="item">4</div>
+                <div class="item justify-item-5">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Align-content: space-evenly;</h1>
+            <span>Cria um espaço igual entre as colunas (no inicio e fim também).</span>
+            <section class="grid align-grid align-space-evenly">
+                <div class="item">1</div>
+                <div class="item justify-item-2">2</div>
+                <div class="item justify-item-3">3</div>
+                <div class="item">4</div>
+                <div class="item justify-item-5">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+    </div>
+
+    <div>
+        <h2 style="text-align: center; background-color: rgb(10, 115, 156); color: rgb(255, 255, 255); padding: 10px;">
+            Justify-items</h2>
+
+        <div class="bloco">
+            <h1>Justify-items: start;</h1>
+
+            <section class="grid justify-item-grid justify-item-start">
+                <div class="item">Conteudo</div>
+                <div class="item justify-item-2">Teste</div>
+                <div class="item justify-item-3">Night</div>
+                <div class="item">Day</div>
+                <div class="item justify-item-5">Lua</div>
+                <div class="item">Lol</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Justify-items: end;</h1>
+
+            <section class="grid justify-item-grid justify-item-end">
+                <div class="item">Conteudo</div>
+                <div class="item justify-item-2">Teste</div>
+                <div class="item justify-item-3">Night</div>
+                <div class="item">Day</div>
+                <div class="item justify-item-5">Lua</div>
+                <div class="item">Lol</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Justify-items: center;</h1>
+
+            <section class="grid justify-item-grid justify-item-center">
+                <div class="item">Conteudo</div>
+                <div class="item justify-item-2">Teste</div>
+                <div class="item justify-item-3">Night</div>
+                <div class="item">Day</div>
+                <div class="item justify-item-5">Lua</div>
+                <div class="item">Lol</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Justify-items: stretch;</h1>
+
+            <section class="grid justify-item-grid justify-item-stretch">
+                <div class="item">Conteudo</div>
+                <div class="item justify-item-2">Teste</div>
+                <div class="item justify-item-3">Night</div>
+                <div class="item">Day</div>
+                <div class="item justify-item-5">Lua</div>
+                <div class="item">Lol</div>
+            </section>
+            <br>
+        </div>
+
+    </div>
+
+    <div>
+        <h2 style="text-align: center; background-color: rgb(10, 115, 156); color: rgb(255, 255, 255); padding: 10px;">
+            align-item: start;</h2>
+
+        <div class="bloco">
+            <h1>Align-content: start;</h1>
+            <span>Justifica os items ao ínicio</span>
+            <section class="grid align-items-grid align-item-start">
+                <div class="item">1</div>
+                <div class="item ">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Align-content: end;</h1>
+            <span>Justifica os items ao final</span>
+            <section class="grid align-items-grid align-item-end">
+                <div class="item">1</div>
+                <div class="item ">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Align-content: center;</h1>
+            <span>Centraliza o conteúdo.</span>
+            <section class="grid align-items-grid align-item-center">
+                <div class="item">1</div>
+                <div class="item ">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Align-content: stretch;</h1>
+            <span>Estica os items.</span>
+            <section class="grid align-items-grid align-item-stretch">
+                <div class="item">1</div>
+                <div class="item ">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                <div class="item">6</div>
+            </section>
+            <br>
+        </div>
+    </div>
+
+
+    <div>
+        <h2 style="text-align: center; background-color: rgb(10, 115, 156); color: rgb(255, 255, 255); padding: 10px;">
+            Grid-column;</h2>
+
+        <div class="bloco">
+            <h1>Grid-column</h1>
+            <section class="grid grid-column-1">
+                <div class="item grid-column-item-1">1</div>
+                <div class="item grid-column-item-2">2</div>
+                <div class="item grid-column-item-3">3</div>
+                <div class="item grid-column-item-4">4</div>
+                <div class="item grid-column-item-5">5</div>
+                <div class="item grid-column-item-6">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-column: span;</h1>
+            <span>O item ocupará a coluna 1 e 2 (Sim, isso mesmo, 1 e 2, pois os valores 1 / 3 são referentes as linhas
+                da coluna. Isso significa que começa na linha 1 (início do grid) e vai até a linha 3, que é o começo da
+                terceira coluna).</span>
+            <section class="grid grid-column-2">
+                <div class="item grid-column-item-1">1</div>
+                <div class="item grid-column-item-2">2</div>
+                <div class="item grid-column-item-3">3</div>
+                <div class="item grid-column-item-4">4</div>
+                <div class="item grid-column-item-5">5</div>
+                <div class="item grid-column-item-6">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-column-start / Grid-column-end</h1>
+            <span>Grid-column faz as duas opçoes, tanto start quanto end</span>
+            <section class="grid grid-column-3">
+                <div class="item grid-column-item-1">1</div>
+                <div class="item grid-column-item-2">2</div>
+                <div class="item grid-column-item-3">3</div>
+                <div class="item grid-column-item-4">4</div>
+                <div class="item grid-column-item-5">5</div>
+                <div class="item grid-column-item-6">6</div>
+            </section>
+            <br>
+        </div>
+
+        <div class="bloco">
+            <h1>[Coluna-inicio]</h1>
+            <span> Definindo o nome de cada linha da coluna dentro das chaves
+                <br> grid-template-columns: [inicio] 1fr [meio] 1fr [final];
+                <br> Item-2 > grid-column: inicio / final; </span>
+            <section class="grid grid-column-4">
+                <div class="item grid-column-item-1">1</div>
+                <div class="item grid-column-item-2">2</div>
+                <div class="item grid-column-item-3">3</div>
+                <div class="item grid-column-item-4">4</div>
+                <div class="item grid-column-item-5">5</div>
+                <div class="item grid-column-item-6">6</div>
+            </section>
+            <img src="galery/grid-column.png" alt="" style="padding-bottom: 20px;">
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-template-areas</h1>
+            <span></span>
+            <section class="grid grid-column-5">
+                <div class="item grid-column-item-1">1</div>
+                <div class="item grid-column-item-2">2</div>
+                <div class="item grid-column-item-3">3</div>
+                <div class="item grid-column-item-4">4</div>
+                <div class="item grid-column-item-5">5</div>
+            </section>
+        </div>
+
+        <div class="bloco">
+            <h1>Grid-column normal</h1>
+            <span></span>
+            <section class="grid grid-column-6">
+                <div class="item grid-column-item-1">1</div>
+                <div class="item grid-column-item-2">2</div>
+                <div class="item grid-column-item-3">3</div>
+                <div class="item grid-column-item-4">4</div>
+                <div class="item grid-column-item-5">5</div>
+            </section>
+        </div>
+
+    </div>
+</body>
+
+</html>
