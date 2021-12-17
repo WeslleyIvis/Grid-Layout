@@ -32,11 +32,37 @@ img {
     "footer footer footer";
 }
 
+@media (max-width: 1200px) {
+    .estrutura {
+        grid-template-areas: 
+        "header header header"
+        "sidenav content content"
+        "sidenav anuncios anuncios"
+        "footer footer footer";
+    }
+}
+
+@media (max-width: 760px) {
+    .estrutura {
+        grid-template-columns: 100%;
+        grid-template-areas:
+        "header"
+        "sidenav"
+        "content"
+        "anuncios"
+        "footer";
+    }
+
+    .sidenav {
+        
+    }
+}
+
 /* HEADER */
 
 .header {
     grid-area: header;
-    background: linear-gradient(130deg, rgb(58, 149, 253), rgb(86, 156, 247));
+    background: linear-gradient(130deg, rgb(58, 145, 226), rgb(58, 132, 243));
     padding: 30px;
     display: grid;
     grid-template-columns: 1fr auto;
@@ -71,6 +97,25 @@ img {
     margin-left: 30px;
 }
 
+@media (max-width: 760px) {
+    .header {
+        grid-template-columns: auto;
+    }
+
+    .logo {
+        margin-bottom: 20px;
+    }
+    
+    .header nav a {
+        font-size: 1em;
+    }
+
+    .header li + li { 
+        margin-left: 10px;
+    }
+}
+
+
 /* SIDENAV */
 
 .sidenav {
@@ -92,12 +137,57 @@ img {
 }
 
 .sidenav li a:hover {
-    background: rgb(133, 152, 235);
+    background: rgb(133, 206, 235);
+}
+
+@keyframes seta {
+    from {
+        right: 30px;
+    }
+    to {
+        right: 20px;
+    }
+}
+
+@media (max-width: 760px) {
+    .sidenav {
+        position: relative;
+        padding: 0 30px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar; /* ms = microsoft (autohiding esconde o scroll)*/
+    }
+    .sidenav::after {
+        content: '→';
+        position: absolute;
+        top: 5px;
+        right: 30px;
+        color: rgba(0,0,0,.3);
+        animation: seta ease-in 0s infinite alternate;
+        animation-duration: .5s;
+
+        
+        /*Nome da key frame = seta
+          velocidade .5
+          deley para começar = 0
+          quantidade de vezes = infinito
+          alternate = efeito boomerang    */
+    }
+    .sidenav ul {
+        display: flex;
+    }
+    .sidenav li {
+        flex: 1 0 60px;
+    }
+    .sidenav ul li {
+        margin: 30px 30px 30px 0;
+    }
 }
 
 /* CONTENT */
 
 .content {
+    background: #edf6fd;
     grid-area: content;
     max-width: 900px;
     margin: 0 auto;
@@ -105,6 +195,12 @@ img {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px;
+}
+
+@media (max-width: 600px) {
+    .content {
+        grid-template-columns: auto;
+    }
 }
 
 .col-wide {
@@ -220,6 +316,7 @@ p {
     align-content: start;
     padding: 30px;
     gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
 .atributos li {
@@ -237,7 +334,7 @@ p {
 
 .footer {
     grid-area: footer;
-    background: linear-gradient(130deg, rgb(249, 175, 23), rgb(248, 190, 74));
+    background: linear-gradient(130deg, rgb(58, 145, 226), rgb(58, 132, 243));
 }
 
 .footer p {
