@@ -3,7 +3,7 @@
 Este site foi criado apenas para entender sobre como funciona o GRID. <br>
 Um site simples e 100% responsivo com algumas funções listadas abaixo.
 
-<img src="https://uploaddeimagens.com.br/imagens/dl8Wf74" style="height="500px", width="500px">
+<img src="https://uploaddeimagens.com.br/imagens/dl8Wf74">
 <hr>
 
 * ## Grid completo
