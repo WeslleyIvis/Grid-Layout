@@ -4,6 +4,8 @@ Este site foi criado apenas para entender sobre como funciona o GRID. <br>
 Um site simples e 100% responsivo com algumas funções listadas abaixo.
 
 <img src="https://uploaddeimagens.com.br/images/003/594/015/original/Grid.jpeg?1639799717">
+
+https://weslleyivis.github.io/Grid-Layout/
 <hr>
 
 * ## Grid completo
@@ -24,5 +26,4 @@ Um site simples e 100% responsivo com algumas funções listadas abaixo.
 
 <hr>
 
-# Site 
-https://weslleyivis.github.io/Grid-Layout/
+
