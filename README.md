@@ -2,6 +2,12 @@
 
 <hr> 
 
+Este site foi criado apenas para entender sobre como funciona o GRID.
+Um site simples e 100% responsivo com algumas funções listadas abaixo.
+
+<img src="https://www.futuraexpress.com.br/blog/wp-content/uploads/2020/05/GRID_HIER%C3%81RQUICO.jpg">
+<hr>
+
 * ## Grid completo
 
 * Grid-Template-Columns
