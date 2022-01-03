@@ -11,8 +11,6 @@ function darkMode() {
 
     const p = document.querySelectorAll('.content p')
 
-
-    console.log(contentDark)
     // console.log(p)
     // console.log(sidenavDark, contentDark, anunciosDark, footerDark)
     // console.log(header.classList.contains('header dark'))
@@ -65,26 +63,68 @@ darkMode();
 function newPages() {
     const sections = document.querySelectorAll('.js-section section')
     const marcas = document.querySelectorAll('.sidenav li')
-    console.log(marcas)
-    console.log(sections)
+    const navHeight = document.querySelector('.header')
+    const navScroll = navHeight.clientHeight
+    
+    console.log(window.scrollY)
+    
+    //console.log(navHeight.getBoundingClientRect());
+    //console.log(navHeight.clientHeight + window.innerHeight)
     
         if(sections.length && marcas.length){
-        sections[0].classList.add('ativo')
+            const defaultA = document.querySelectorAll('a[href^="#"]')
+            sections[0].classList.add('ativo')
 
-        function newContent(index) {            
-            sections.forEach((conteudo) => {
-                conteudo.classList.remove('ativo');
-            })
-            sections[index].classList.add('ativo');
+            defaultA.forEach((link) => {
+                link.addEventListener('click', function (event){
+                    event.preventDefault();
+                    console.log(event.currentTarget.href)
+                })
+            });
+
+            function newContent(index) {      
+                sections.forEach((conteudo) => {
+                    conteudo.classList.remove('ativo');
+                })
+            sections[index].classList.add('ativo'); 
+
+            if(window.scrollY > navScroll){
+                window.scrollBy({
+                    top: 0,
+                    left: 0,
+                });  
+            } else {
+                window.scrollBy({
+                    top: navScroll - window.scrollY,
+                    left: 0,
+                    behavior: 'smooth',
+                });  
+            }   
         }
-
         marcas.forEach((pages, index) => {
-            pages.addEventListener('click', () => {
+            
+            pages.addEventListener('click', () => {       
                 newContent(index)
-                console.log(pages, index);
             })
         });
     }
 }
 
 newPages();
+
+
+
+function clickNoLink(event) {
+    event.preventDefault();
+    console.log(event.currentTarget.href)
+}
+
+function imagem(event) {
+    console.log(this)
+    console.log(this.getAttribute('href'))
+}
+
+
+
+
+
