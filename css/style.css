@@ -62,11 +62,34 @@ img {
 
 .header {
     grid-area: header;
-    background: linear-gradient(130deg, rgb(58, 145, 226), rgb(58, 132, 243));
     padding: 30px;
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
+}
+
+.header .div {
+    width: 100vw;
+}
+
+.nav-background {
+    z-index: -1;
+    max-height: 100px;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 0;
+    background: linear-gradient(130deg, rgb(93, 102, 102), rgb(97, 106, 110));
+}
+
+.moon-sol::before {
+    content: '☾';
+}   
+
+.moon-button::before {
+    content: '☼';
 }
 
 .logo {
@@ -75,7 +98,7 @@ img {
 
 .header nav ul {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap; 
 }
 
 .header nav a {
@@ -347,7 +370,7 @@ p {
 /* JAVASCRIPT*/ 
 
 .dark-color{
-    background:rgb(89, 137, 240) !important;   
+    background:rgb(35, 37, 35) !important;   
 }
 
 .content-dark {
@@ -359,7 +382,7 @@ p {
     background: rgb(23 23 23) !important;
 }
 
-.p-dark {
+.p-dark:not(.destaque) {
     font-size: 1.2em;
     line-height: 1.6;
     letter-spacing: 0.005em;

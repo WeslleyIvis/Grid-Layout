@@ -1,8 +1,10 @@
 function darkMode() {
 
     const buttonDark = document.querySelector('.header li')
+    const buttonTema = document.querySelector('.moon-sol')
 
-    const header = document.querySelector('.header')
+
+    const header = document.querySelector('.nav-background')
     const sidenavDark = document.querySelector('.sidenav')
     const contentDark = document.querySelectorAll('.js-section section')
     const anunciosDark = document.querySelector('.anuncios')
@@ -16,7 +18,6 @@ function darkMode() {
     // console.log(header.classList.contains('header dark'))
 
     function modeDark(color){
-        console.log('dark')
         color.preventDefault(); 
     
         if (header.classList.contains('dark-color') === true) {
@@ -24,6 +25,7 @@ function darkMode() {
             sidenavDark.classList.remove('aside-dark')
             anunciosDark.classList.remove('aside-dark')
             bodyDark.classList.remove('content-dark')
+            buttonTema.classList.remove('moon-button')
 
             contentDark.forEach((content) => {
                 content.classList.remove('content-dark')
@@ -39,6 +41,7 @@ function darkMode() {
             sidenavDark.classList.add('aside-dark')
             anunciosDark.classList.add('aside-dark')
             bodyDark.classList.add('content-dark')
+            buttonTema.classList.add('moon-button')
             
             contentDark.forEach((content) => {
                 content.classList.add('content-dark')
@@ -48,13 +51,9 @@ function darkMode() {
                 itens.classList.add('p-dark')
             })
             
-    
-            console.log('false')
         }
 
-        console.log(buttonDark) 
     };
-
     buttonDark.addEventListener('click', modeDark)
 }
 
@@ -90,9 +89,11 @@ function newPages() {
 
             if(window.scrollY > navScroll){
                 window.scrollBy({
-                    top: 0,
+                    top: -window.scrollY + navScroll,
                     left: 0,
+                    behavior: 'smooth',
                 });  
+                console.log('a')
             } else {
                 window.scrollBy({
                     top: navScroll - window.scrollY,
@@ -102,7 +103,7 @@ function newPages() {
             }   
         }
         marcas.forEach((pages, index) => {
-            
+            console.log(pages, index)
             pages.addEventListener('click', () => {       
                 newContent(index)
             })
