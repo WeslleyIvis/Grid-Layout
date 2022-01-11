@@ -114,16 +114,51 @@ function newPages() {
 newPages();
 
 
+function newBg(){
+    const header = document.querySelector('.header')
+    const divChild = document.querySelector('.header div')
+    const newBG = document.createElement('img')
+    console.log(divChild)
 
-function clickNoLink(event) {
-    event.preventDefault();
-    console.log(event.currentTarget.href)
+    
+    header.childNodes.forEach((child) => {
+        console.log(child.nodeName)
+        if(child.nodeName === 'IMG') {
+            header.removeChild(newBG)
+        } else {
+            newBG.setAttribute('src', 'galery/ArtJP2000x200.svg')
+            newBG.classList.add('nav-background')
+            header.insertBefore(newBG, divChild)
+        }
+    }) 
 }
 
-function imagem(event) {
-    console.log(this)
-    console.log(this.getAttribute('href'))
-}
+const backgroundNav = document.querySelector('.new-bg');
+
+
+backgroundNav.addEventListener('click', newBg)
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function clickNoLink(event) {
+//     event.preventDefault();
+//     console.log(event.currentTarget.href)
+// }
+
+// function imagem(event) {
+//     console.log(this)
+//     console.log(this.getAttribute('href'))
+// }
 
 
 
