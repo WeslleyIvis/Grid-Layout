@@ -1,16 +1,12 @@
 function darkMode() {
-
     const buttonDark = document.querySelector('.header li')
     const buttonTema = document.querySelector('.moon-sol')
-
-
     const header = document.querySelector('.nav-background')
     const sidenavDark = document.querySelector('.sidenav')
     const contentDark = document.querySelectorAll('.js-section section')
     const anunciosDark = document.querySelector('.anuncios')
     const footerDark = document.querySelector('.footer')
     const bodyDark = document.querySelector('body')
-
     const p = document.querySelectorAll('.content p')
 
     // console.log(p)
@@ -34,8 +30,7 @@ function darkMode() {
             p.forEach((itens) => {
                 itens.classList.remove('p-dark')
             })
-            
-            console.log('true')
+
         }  else {
             header.classList.add('dark-color')
             sidenavDark.classList.add('aside-dark')
@@ -57,7 +52,6 @@ function darkMode() {
     buttonDark.addEventListener('click', modeDark)
 }
 
-darkMode();
 
 function newPages() {
     const sections = document.querySelectorAll('.js-section section')
@@ -115,37 +109,59 @@ newPages();
 
 
 function newBg(){
-    const header = document.querySelector('.header')
-    const divChild = document.querySelector('.header div')
-    const newBG = document.createElement('img')
-    console.log(divChild)
-
+    const bgHeader = document.querySelector('.nav-background') 
+    const onlyHeader = bgHeader.cloneNode(true);
+    console.log(onlyHeader)
     
-    header.childNodes.forEach((child) => {
-        console.log(child.nodeName)
-        if(child.nodeName === 'IMG') {
-            header.removeChild(newBG)
-        } else {
-            newBG.setAttribute('src', 'galery/ArtJP2000x200.svg')
-            newBG.classList.add('nav-background')
-            header.insertBefore(newBG, divChild)
-        }
-    }) 
+    console.log(bgHeader.attributes.length)
+
+    if(bgHeader.attributes.length >= 2) {
+        bgHeader.removeAttribute('src')
+        const tagImg = bgHeader.outerHTML.split('img').join('div')
+        bgHeader.outerHTML = tagImg
+        console.log(bgHeader)
+    } else {
+        bgHeader.setAttribute('src', 'galery/ArtJP1500x200.svg')
+        const tagImg = bgHeader.outerHTML.split('div').join('img')
+        bgHeader.outerHTML = tagImg
+        console.log('b')
+    }
+
+    console.log(bgHeader)
+    console.log(onlyHeader, ' 1')
+
+ 
+    // bgHeader.setAttribute('src', '')
+    // console.log(bgHeader.outerHTML)
+    
+    // if(!!bgHeader.attributes.item(1).value) {
+    //     console.log('true')
+    // } else {
+    //     bgHeader.setAttribute('src', 'galery/ArtJP2000x200.svg')
+    //     bgHeader = bgHeader.outerHTML.split('div').join('img')
+    //     console.log(bgHeader)
+    //     return bgHeader
+    // }
+       
+    // header.removeChild(newBG)      
+
+    // newBG.setAttribute('src', 'galery/ArtJP2000x200.svg')
+    // newBG.classList.add('nav-background')
+    // header.appendChild(header)
+
 }
 
 const backgroundNav = document.querySelector('.new-bg');
 
-
-backgroundNav.addEventListener('click', newBg)
-
-
-
+backgroundNav.addEventListener('click', () => {
+    newBg()
+})
 
 
 
 
 
-
+darkMode();
 
 
 
