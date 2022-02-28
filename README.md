@@ -1,7 +1,7 @@
 ﻿# Grid-Layout
 
 Este site foi criado no intuito de entender sobre como funciona o GRID. <br>
-Um site simples e 100% responsivo com algumas funções listadas abaixo.
+Um site simples e 100% responsivo.
 
 <img src="https://uploaddeimagens.com.br/images/003/594/015/original/Grid.jpeg?1639799717">
 
